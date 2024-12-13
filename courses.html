@@ -296,6 +296,124 @@
             'star-intensity': 0.6 // Background star brightness (default 0.35 at low zoooms )
         });
         });
+
+        const routes = [
+            [[ 110.367189979968771, -7.782831738228521 ], [ 110.374882986271103, -7.782967243069937 ], [ 110.374878844201703, -7.783002746521836 ], [ 110.367190867555067, -7.78290304099442 ]],
+            [[ 110.374913312136172, -7.782971089277224 ], [ 110.376006226730411, -7.776237859624531 ], [ 110.375912142582862, -7.776184604446681 ], [ 110.375838768782273, -7.77607927753938 ], [ 110.375856520508236, -7.775907677521865 ], [ 110.376015102593385, -7.775796433372581 ], [ 110.376164217091358, -7.775813001650134 ], [ 110.376280195034226, -7.775936080283385 ], [ 110.376282561931021, -7.776101763058914 ], [ 110.376194986749667, -7.776201172724233 ], [ 110.376093210187562, -7.776246143763305 ], [ 110.375005621111072, -7.782963396862641 ]],
+            [[ 110.375014201111796, -7.782986178244271 ], [ 110.381320797617505, -7.78304061687052 ]],
+            [[ 110.373720100289731, -7.788456668457743 ], [ 110.373402936119433, -7.78834424086006 ], [ 110.373252638173071, -7.788138320839044 ], [ 110.373195832650026, -7.787780919423259 ], [ 110.373219501617925, -7.786926469680882 ], [ 110.373814776161467, -7.786855462777084 ], [ 110.374335493456002, -7.786893333125777 ], [ 110.375244381824615, -7.787314640754981 ], [ 110.375286985966866, -7.787411683523506 ], [ 110.375218345959865, -7.787737131832582 ], [ 110.374851476956906, -7.788372643621576 ], [ 110.374662125213433, -7.788505189842001 ], [ 110.374423068637313, -7.788557261571452 ], [ 110.374148508609295, -7.788559628468246 ], [ 110.373720100289731, -7.788456668457743 ], [ 110.375286985966866, -7.787411683523506 ], [ 110.375218345959865, -7.787737131832582 ], [ 110.374851476956906, -7.788372643621576 ], [ 110.374662125213433, -7.788505189842001 ], [ 110.374423068637313, -7.788557261571452 ], [ 110.374148508609295, -7.788559628468246 ], [ 110.373720100289731, -7.788456668457743 ]],
+            [[ 110.367042492711548, -7.782690907869306 ], [ 110.36756321000604, -7.778045872912483 ], [ 110.368083927300546, -7.77398427801521 ], [ 110.368107596268445, -7.773402021404061 ], [ 110.368156709376905, -7.773403796576657 ], [ 110.368129490063751, -7.773986644912002 ], [ 110.367092789268312, -7.782686174075717 ]],
+            [[ 110.368960270838173, -7.789740709968095 ], [ 110.369227730175808, -7.789569109950582 ], [ 110.369596966075562, -7.789500469943577 ], [ 110.369929515075015, -7.789399876829862 ], [ 110.371604094556218, -7.788201043604064 ], [ 110.372385170498006, -7.787912282195284 ], [ 110.373142577471853, -7.787803404942792 ]],
+            [[ 110.373174530578609, -7.787934767714821 ], [ 110.37286979261647, -7.787905773229102 ], [ 110.372343158079971, -7.787997490479841 ], [ 110.371573916622154, -7.788340690514865 ], [ 110.370002297151373, -7.789427096142981 ], [ 110.369780992301216, -7.789535973395474 ], [ 110.369251990867923, -7.789635383060792 ], [ 110.369017668085391, -7.789821184459064 ]],
+            [[ 110.374314783108645, -7.776157089271439 ], [ 110.373417729223988, -7.778097944641928 ], [ 110.372324222905505, -7.782874342370773 ]],
+            [[ 110.371436636608038, -7.783040025146303 ], [ 110.37125734417593, -7.784184419745853 ], [ 110.372378069807567, -7.786938895889036 ], [ 110.372323631181317, -7.78740280766052 ], [ 110.372331915320089, -7.787857251844829 ]],
+            [[ 110.372241381517753, -7.787881512536963 ], [ 110.372218895998216, -7.787359611794044 ], [ 110.37229937048923, -7.786916410369503 ], [ 110.371235154518473, -7.784206017679088 ]],
+            [[ 110.371214444171429, -7.784219331473547 ], [ 110.36953039710302, -7.785692724727363 ]],
+            [[ 110.369535722620839, -7.785702784038736 ], [ 110.369597853661645, -7.786513446190433 ], [ 110.369737500572441, -7.786956055890777 ], [ 110.370232182002241, -7.787554880779478 ], [ 110.370733964122422, -7.787857843569018 ], [ 110.371406162811709, -7.788070864280413 ], [ 110.371808535266567, -7.788088616006364 ]],
+            [[ 110.371471252473526, -7.788267316714253 ], [ 110.371348173840275, -7.78811346842269 ], [ 110.370523310307831, -7.787830624255892 ], [ 110.370080700607488, -7.787506359395213 ], [ 110.369706730914132, -7.786976174513517 ], [ 110.369658801254047, -7.786836527602714 ]],
+            [[ 110.374283569656853, -7.786748508628204 ], [ 110.374920264894229, -7.782998160659246 ], [ 110.375004289730384, -7.783013545488402 ], [ 110.374382979322149, -7.786791112770483 ]]
+        ];
+
+        const modelAltitude = 0;
+        const modelRotate = [Math.PI / 2, 0, 0];
+
+        // Create individual state for each route
+        // Update state initialization to include direction
+        const states = routes.map(() => ({
+            routeIndex: 0,
+            progress: 0,
+            direction: 1, // 1 means forward, -1 means backward
+        }));
+
+        const updateModelPosition = (state, route) => {
+            const start = route[state.routeIndex];
+            const nextIndex = (state.routeIndex + state.direction + route.length) % route.length;
+            const end = route[nextIndex];
+
+            const lng = start[0] + state.progress * (end[0] - start[0]);
+            const lat = start[1] + state.progress * (end[1] - start[1]);
+
+            state.progress += 0.005; // Adjust for animation speed
+
+            if (state.progress >= 1) {
+                state.progress = 0;
+                state.routeIndex = nextIndex;
+
+                // Reverse direction at the ends of the route
+                if (state.routeIndex === 0 || state.routeIndex === route.length - 1) {
+                    state.direction *= -1;
+                }
+            }
+
+            return [lng, lat];
+        };
+
+
+        const THREE = window.THREE;
+
+        // Create layers for each model
+        routes.forEach((route, index) => {
+            const customLayer = {
+                id: `3d-model-${index}`,
+                type: 'custom',
+                renderingMode: '3d',
+                onAdd: function (map, gl) {
+                    this.camera = new THREE.Camera();
+                    this.scene = new THREE.Scene();
+
+                    const directionalLight = new THREE.DirectionalLight(0xffffff,4);
+                    directionalLight.position.set(0, -90, 100).normalize();
+                    this.scene.add(directionalLight);
+                    
+
+                    const loader = new THREE.GLTFLoader();
+                    loader.load(
+                        'img/carr.glb',
+                        (gltf) => {
+                            this.model = gltf.scene;
+                            this.scene.add(this.model);
+                            this.model.scale.set(2, 2, 2);
+                        }
+                    );
+
+                    this.map = map;
+                    this.renderer = new THREE.WebGLRenderer({
+                        canvas: map.getCanvas(),
+                        context: gl,
+                        antialias: true
+                    });
+
+                    this.renderer.autoClear = false;
+                },
+                render: function (gl, matrix) {
+                    if (!this.model) return;
+
+                    const newPosition = updateModelPosition(states[index], route);
+                    const mercatorCoordinate = mapboxgl.MercatorCoordinate.fromLngLat(newPosition, modelAltitude);
+
+                    const rotationX = new THREE.Matrix4().makeRotationAxis(new THREE.Vector3(1, 0, 0), modelRotate[0]);
+                    const rotationY = new THREE.Matrix4().makeRotationAxis(new THREE.Vector3(0, 1, 0), modelRotate[1]);
+                    const rotationZ = new THREE.Matrix4().makeRotationAxis(new THREE.Vector3(0, 0, 1), modelRotate[2]);
+
+                    const m = new THREE.Matrix4().fromArray(matrix);
+                    const l = new THREE.Matrix4()
+                        .makeTranslation(mercatorCoordinate.x, mercatorCoordinate.y, mercatorCoordinate.z)
+                        .scale(new THREE.Vector3(mercatorCoordinate.meterInMercatorCoordinateUnits(), -mercatorCoordinate.meterInMercatorCoordinateUnits(), mercatorCoordinate.meterInMercatorCoordinateUnits()))
+                        .multiply(rotationX)
+                        .multiply(rotationY)
+                        .multiply(rotationZ);
+
+                    this.camera.projectionMatrix = m.multiply(l);
+                    this.renderer.resetState();
+                    this.renderer.render(this.scene, this.camera);
+                    this.map.triggerRepaint();
+                }
+            };
+
+            map.on('style.load', () => {
+                map.addLayer(customLayer, 'waterway-label');
+            });
+        });
         
         const nav = new mapboxgl.NavigationControl({ showCompass: true });
         map.addControl(nav, 'bottom-right');
@@ -381,8 +499,7 @@
         
         
         const modelOrigin = [110.374298,    -7.786487];
-        const modelAltitude = 0;
-        const modelRotate = [Math.PI / 2, -0.025, 0];
+
 
         const modelAsMercatorCoordinate = mapboxgl.MercatorCoordinate.fromLngLat(
             modelOrigin,
@@ -403,7 +520,7 @@
             scale: modelAsMercatorCoordinate.meterInMercatorCoordinateUnits()
         };
 
-        const THREE = window.THREE;
+
 
         
 
