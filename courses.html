@@ -76,8 +76,8 @@
         }
     #image-ui {
             position: absolute;
-            top: 320px; /* Jarak dari atas */
-            left: 10px; /* Jarak dari kiri */
+            top: 250px; /* Jarak dari atas */
+            right: 10px; /* Jarak dari kiri */
             z-index: 999; /* Supaya muncul di atas peta */
             background-color: white;
             border: 2px solid #ccc;
@@ -155,7 +155,178 @@
     .control-button button:hover {
             opacity: 0.8; /* Efek hover */
         }
-    
+        .history-dropdown {
+      position: absolute;
+      top: 95px;
+      right: 220px; /* Atur sesuai lokasi "Area & Perimeter" */
+      font-family: Arial, sans-serif;
+      z-index: 1000;
+    }
+
+    /* Tombol Dropdown */
+    #history-btn {
+      background-color: #0dcaf0;
+      color: white;
+      padding: 8px 12px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+      z-index: 1000;
+    }
+
+    #history-btn:hover {
+      background-color: #0dcaf0;
+    }
+
+    /* Isi Dropdown */
+    .dropdown-content {
+      display: none;
+      background-color: white;
+      border: 1px solid #ccc;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+      border-radius: 5px;
+      position: absolute;
+      right: 0; /* Menggeser dropdown ke kiri tombol */
+       /* Geser ke kiri sejauh 100% dari lebarnya */
+      width: 250px;
+      list-style: none;
+      margin: 0;
+      padding: 10px 0;
+      z-index: 1000;
+    }
+
+    .dropdown-content li {
+      padding: 8px 15px;
+      font-size: 14px;
+      border-bottom: 1px solid #f1f1f1;
+    }
+
+    .dropdown-content li:last-child {
+      border-bottom: none;
+    }
+
+    .dropdown-content li:hover {
+      background-color: #f5f5f5;
+      cursor: pointer;
+    }
+    /* CSS untuk Pop-up */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+    }
+
+    .modal-content {
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      width: 400px;
+      text-align: center;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    width: 60%;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+
+    table, th, td {
+      border: 1px solid #ddd;
+    }
+
+    th, td {
+      padding: 10px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #f4f4f4;
+    }
+
+    .close-btn {
+      background-color: red;
+      color: white;
+      padding: 5px 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    /* Container untuk tombol dan badge */
+    .history-container {
+      position: relative;
+      display: inline-block; /* Supaya ukuran mengikuti konten */
+    }
+
+/* Tombol History */
+    .history-btn {
+      padding: 8px 15px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    /* Badge notifikasi */
+    .notification-badge {
+      position: absolute;
+      top: -8px; /* Geser ke atas */
+      right: -8px; /* Geser ke kanan */
+      background-color: red;
+      color: white;
+      font-size: 12px;
+      font-weight: bold;
+      border-radius: 50%; /* Membuat bulatan */
+      padding: 4px 7px;
+      line-height: 1;
+      text-align: center;
+      min-width: 18px; /* Ukuran minimal agar angka terlihat baik */
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); /* Efek bayangan */
+    }
+
+    #history-content {
+        display: none;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    #history-content li {
+        padding: 10px;
+        cursor: pointer;
+    }
+
+    #history-content li:hover {
+        background-color: #f1f1f1;
+    }
+
+    .action-btn {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    margin-right: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+    .action-btn:hover {
+        background-color: #218838;
+    }
+
+
     </style>
     <link rel="stylesheet" href="node_modules/@mapbox-controls/ruler/src/index.css">
     <script src="https://cdn.jsdelivr.net/npm/mapbox-gl-rain-layer@latest/dist/mapbox-gl-rain-layer.min.js"></script>
@@ -250,15 +421,47 @@
         <label for="streets-v12">OSM</label>
     </div>
     <div id="rulerControlContainer" class="custom-ruler-control"></div>
+
+    <div class="history-dropdown">
+        <button id="history-btn">Aktivitas ⌄</button>
+        <span class="notification-badge">2</span>
+        <ul id="history-content" class="dropdown-content">
+          <!-- Data transaksi akan dimuat di sini -->
+        </ul>
+    </div>
     
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <h3>Detail Transaksi</h3>
+            <table id="transaction-table" border="1" style="width: 100%; border-collapse: collapse;">
+                <thead>
+                    <tr>
+                        <th>Informasi</th>
+                        <th>Nilai Lama</th>
+                        <th>Nilai Baru</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Data akan ditampilkan oleh JavaScript -->
+                </tbody>
+            </table>
+            <div style="margin-top: 10px;">
+                <!-- Tombol baru -->
+                <button id="fly-to-location" class="action-btn" onclick="changeView(20, 0, 0,  -7.786757, 110.370501)">Lihat Lokasi</button>
+                <button class="close-btn" id="close-modal">Tutup</button>
+            </div>
+        </div>
+    </div>
+    
+
     <div class="control-button">
-        <button onclick="changeView(15, 0, 0)">
+        <button onclick="changeView(15, 0, 0,-7.786487,110.374298)">
             <img src="https://images.vexels.com/content/139243/preview/parallelogram-shape-rounded-corners-02b586.png" alt="View 1" title="Orthoview">
         </button>
-        <button onclick="changeView(15, 60, -60)">
+        <button onclick="changeView(15, 60, -60,-7.786487,110.374298)">
             <img src="https://static.vecteezy.com/system/resources/previews/048/033/944/non_2x/flying-bird-silhouette-icon-with-simple-and-modern-design-png.png" alt="View 2" title="Bird-Eye View">
         </button>
-        <button onclick="changeView(15, 60, 0)">
+        <button onclick="changeView(15, 60, 0,-7.786487,110.374298)">
             <img src="https://cdn-icons-png.flaticon.com/512/2618/2618245.png" alt="View 3" title="Reset View">
         </button>
     </div>
@@ -419,13 +622,14 @@
         map.addControl(nav, 'bottom-right');
 
        
-        function changeView(zoom, pitch, bearing) {
-            map.flyTo({
-                zoom: zoom,
-                pitch: pitch,
-                bearing: bearing,
-                duration: 2000 // Durasi animasi dalam milidetik
-            });
+        function changeView(zoom, pitch, bearing, lat, long) {
+        map.flyTo({
+            center: [long, lat],  // Pastikan posisi adalah [long, lat] karena Leaflet.js menggunakan urutan [lng, lat]
+            zoom: zoom,
+            pitch: pitch,         // Perhatikan bahwa Leaflet.js tidak mendukung pitch, jadi bisa diabaikan atau disesuaikan dengan peta lainnya (misalnya, Mapbox)
+            bearing: bearing,     // Sama seperti pitch, Leaflet.js tidak memiliki dukungan langsung untuk bearing, kecuali menggunakan Mapbox
+            duration: 2000         // Durasi animasi dalam milidetik
+        });
         }
 
         map.addControl(
@@ -893,7 +1097,7 @@
                 'fill-extrusion-opacity': 1
             }
         });
-        map.moveLayer('geojson-layer-RDTR', 'geojson-layer-bidang', 'building-extrusion', 'rain');
+        map.moveLayer('geojson-layer-bidang',  'building-extrusion','geojson-layer-RDTR', 'rain');
         
 
 
@@ -1169,7 +1373,105 @@
         });
 
         
-        
+
+        const transactions = [
+            { name: "12/1/2024, 12:10:43 AM", value: "TRANSACTION" },
+            { name: "12/1/2024, 12:12:00 AM", value: "TRANSACTION" }
+        ];
+        function populateHistory() {
+        const historyContent = document.getElementById("history-content");
+        historyContent.innerHTML = "";  // Kosongkan history yang lama
+
+        transactions.forEach((transaction) => {
+            const li = document.createElement("li");
+            li.textContent = `${transaction.name}: ${transaction.value}`;
+            li.addEventListener("click", () => showModal(transaction));  // Tampilkan modal saat klik
+            historyContent.appendChild(li);
+        });
+          }
+
+        // Dummy data detail transaksi
+        const transactionDetails = {
+            1: [
+                { info: "NIB", old: "123456789", new: "987654321" },
+                { info: "Jenis Hak", old: "Hak Milik", new: "Hak Pakai" },
+                { info: "Penggunaan", old: "Perumahan", new: "Komersial" },
+                { info: "Luas", old: "200 m2", new: "250 m2" },
+                { info: "Pemilik", old: "John Doe", new: "Jane Smith" },
+                { info: "Kecamatan", old: "Kec. Lama", new: "Kec. Baru" },
+                { info: "Kelurahan", old: "Kel. Lama", new: "Kel. Baru" }
+            ],
+            2: [
+                { info: "NIB", old: "111222333", new: "333222111" },
+                { info: "Jenis Hak", old: "Hak Guna Bangunan", new: "Hak Milik" },
+                { info: "Penggunaan", old: "Industri", new: "Pertanian" },
+                { info: "Luas", old: "300 m2", new: "400 m2" },
+                { info: "Pemilik", old: "Alice Brown", new: "Bob White" },
+                { info: "Kecamatan", old: "Kec. Tengah", new: "Kec. Utara" },
+                { info: "Kelurahan", old: "Kel. Lama", new: "Kel. Baru" }
+            ]
+        };
+
+        // Dummy data lokasi berdasarkan NIB
+        // Fungsi untuk menampilkan modal dengan detail transaksi
+        function showModal(transaction) {
+            const modal = document.getElementById("modal");
+            const tableBody = document.querySelector("#transaction-table tbody");
+            tableBody.innerHTML = ""; // Kosongkan tabel sebelumnya
+
+            // Pilih dummy data berdasarkan transaksi
+            const details = transactionDetails[transactions.findIndex(t => t.name === transaction.name) + 1];
+            
+            // Tentukan koordinat lat lng langsung (tanpa perlu mengambil dari locationData)
+            let selectedLatLng = { lat: -7.785448, lng: 110.372014 };  // Contoh koordinat (ubah sesuai kebutuhan)
+
+            // Generate baris tabel
+            details.forEach(row => {
+                if (row.info === "NIB") {
+                    // Anda bisa memodifikasi kode ini untuk mengambil NIB jika perlu
+                    // Misalnya jika ingin mengubah koordinat berdasarkan NIB, ubah selectedLatLng
+                }
+
+                const tr = document.createElement("tr");
+                tr.innerHTML = `
+                    <td>${row.info}</td>
+                    <td>${row.old}</td>
+                    <td>${row.new}</td>
+                `;
+                tableBody.appendChild(tr);
+            });
+
+
+            modal.style.display = "flex"; // Tampilkan modal
+        }
+
+        // Event Listener untuk menutup modal
+        document.getElementById("close-modal").addEventListener("click", () => {
+            document.getElementById("modal").style.display = "none";
+        });
+
+
+        // Fungsi untuk menampilkan dropdown ketika tombol ditekan
+        document.getElementById("history-btn").addEventListener("click", function(event) {
+            event.stopPropagation();
+            const dropdown = document.getElementById("history-content");
+            populateHistory();
+            dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+        });
+
+        // Menutup dropdown ketika klik di luar dropdown
+        window.addEventListener("click", function(event) {
+            if (!event.target.matches("#history-btn")) {
+                document.getElementById("history-content").style.display = "none";
+            }
+        // Menutup dropdown ketika klik di luar dropdown
+        window.addEventListener("click", function(event) {
+            if (!event.target.matches("fly-to-location")) {
+                document.getElementById("modal").style.display = "none";
+            }
+});
+});
+
     });
     
     </script>
